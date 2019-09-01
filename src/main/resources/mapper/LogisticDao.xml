@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.dao.LogisticDao">
+    <select id="findLogisticsByExpId" resultType="com.qst.domain.Logistic">
+        select * from j_logistics where exp_id=#{exp_id};
+    </select>
+
+    <insert id="addLogistic" parameterType="com.qst.domain.Logistic">
+        insert into j_logistics values (#{log_id}, #{exp_id}, #{place}, #{ar_time});
+    </insert>
+
+    <select id="findNowLd" resultType="java.lang.String">
+        select place from j_logistics where exp_id=#{exp_id} order by ar_time desc limit 0, 1;
+    </select>
+</mapper>

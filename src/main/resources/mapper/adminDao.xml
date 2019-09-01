@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.dao.AdminDao">
+    <select id="findAdminByUnAndPs" resultType="com.qst.domain.Admin">
+        select
+         admin_ID as id,
+         ad_username as password
+        from j_admin where ad_pass=#{pw} and ad_username=#{no}
+    </select>
+
+</mapper>

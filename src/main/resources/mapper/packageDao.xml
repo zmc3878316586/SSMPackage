@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.dao.PackageDao">
+    <!-- 向包裹表中添加一条数据 -->
+    <insert id="addPackage" parameterType="com.qst.domain.Package">
+        insert into j_package values (#{pa_id}, #{exp_id}, #{pa_type}, #{send_name}, #{send_tel}, #{send_place}, #{rec_name}, #{rec_tel}, #{rec_place}, #{marks});
+    </insert>
+
+    <!-- 查询表中所有的包裹 -->
+    <select id="findAllPkgs" resultType="com.qst.domain.Package">
+        select * from j_package;
+    </select>
+
+    <!-- 根据快递单号查询包裹 -->
+    <select id="findPkgs" resultType="com.qst.domain.Package">
+        select * from j_package where 1=1
+        <if test="status != null and status!=''">
+            and pa_type=#{status}
+        </if>
+        <if test="id!=null and id!=''">
+            and exp_id=#{id};
+        </if>
+    </select>
+
+    <select id="findPkg" resultType="com.qst.domain.Package">
+        select * from j_package where exp_id=#{id};
+    </select>
+
+    <update id="setStatus">
+        update j_package set pa_type=#{status} where exp_id=#{id};
+    </update>
+</mapper>
+

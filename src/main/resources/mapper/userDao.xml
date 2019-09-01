@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qst.dao.UserDao">
+    <!-- 根据用户名和密码查询账户 -->
+    <select id="findUserByUnAndPs" resultType="com.qst.domain.User">
+        select * from  j_employee where em_no = #{no} and em_password = #{pw};
+    </select>
+
+    <insert id="addUser" parameterType="com.qst.domain.User">
+        insert into j_employee values(#{em_id},#{em_no},#{em_password},#{em_name},#{em_sex},#{em_age},#{em_tel},#{em_home},#{em_place});
+    </insert>
+
+    <select id="findUser" resultType="com.qst.domain.User">
+        select * from j_employee where 1=1
+        <if test="name != null and name != ''">
+            and em_name like concat('%', #{name}, '%')
+        </if>
+        <if test="userNo != null and userNo != ''">
+            and em_no=#{userNo}
+        </if>
+    </select>
+
+    <select id="findAllUser" resultType="com.qst.domain.User">
+        select * from j_employee;
+    </select>
+
+    <delete id="delUser" parameterType="java.lang.Integer">
+        delete from j_employee where em_id=#{em_id};
+    </delete>
+
+    <select id="findUserById" resultType="com.qst.domain.User">
+        select * from j_employee where em_id=#{em_id};
+    </select>
+</mapper>
+
